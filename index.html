@@ -8,16 +8,16 @@
 <body>
     <form action="submit" method="post">
         <label for="date">受診希望日付を選択する:</label>
-        <input type="date" id="date" name="date" required><br>
+        <input type="date" class ="form-control w-100 mt-1" id="date" name="date" required><br>
 
         <label for="time">希望日時を選択する:</label>
-        <input type="time" id="time" name="time" required><br>
+        <input type="time" class ="form-control w-100 mt-1" id="time" name="time" required><br>
 
         <label for="lastName">姓(せい)を入力する:</label>
-        <input type="text" id="lastName" name="lastName" required><br>
+        <input type="text" class ="form-control w-100 mt-1" id="lastName" name="lastName" required><br>
 
         <label for="firstName">名(めい)を入力する:</label>
-        <input type="text" id="firstName" name="firstName" required><br>
+        <input type="text" class ="form-control w-100 mt-1" id="firstName" name="firstName" required><br>
 
         <label>会員番号の入力:</label><br>
         <input type="radio" id="knowMember" name="memberStatus" value="known" onclick="toggleMemberInput(true)">会員番号がわかる
