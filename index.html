@@ -44,17 +44,18 @@
     
     <!-- トグルボタンの結果に応じてInnputBOXの表示可否を変更 -->
     <script>
-        function toggleMemberInput(show) {
-        var toggleButton = document.querySelector('button');
-        
-        if (memberInputDiv.style.display === "none" || memberInputDiv.style.display === "") {
-            memberInputDiv.style.display = "block";
-            toggleButton.textContent = "番号がわからない";
-        } else {
-            memberInputDiv.style.display = "none";
-            toggleButton.textContent = "番号がわかる";
+        function toggleMemberInput() {
+            var memberInputDiv = document.getElementById("memberInput");
+            var toggleButton = document.querySelector('button');
+            
+            if (memberInputDiv.style.display === "none" || memberInputDiv.style.display === "") {
+                memberInputDiv.style.display = "block";
+                toggleButton.textContent = "番号がわからない";
+            } else {
+                memberInputDiv.style.display = "none";
+                toggleButton.textContent = "番号がわかる";
+            }
         }
-    }
     </script>
     <script>
     $(document).ready(function () {
