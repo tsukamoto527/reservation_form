@@ -1,4 +1,4 @@
-//<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<!-- <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%> -->
 <!DOCTYPE html>
 <html>
 <head>
@@ -34,6 +34,13 @@
         <input type="submit" value="送信">
     </form>
 
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" crossorigin="anonymous"></script>
+    <script charset="utf-8" src="https://static.line-scdn.net/liff/edge/2.1/sdk.js"></script>
+    
+    <!-- ラジオボタンの結果に応じてInnputBOXの表示可否を変更 -->
     <script>
         function toggleMemberInput(show) {
             var memberInputDiv = document.getElementById("memberInput");
@@ -78,7 +85,7 @@
             const firstName  = $('input[name="firstName"]').val();
             const memberNumber = $('input[name="memberNumber"]').val();
             const comments = $('input[name="comments"]').val();
-            const msg = `${name}\n${time}\n${lastName}\n${firstName}\n${memberNumber}\n${comments}`;
+            const msg = `${date}\n${time}\n${lastName}\n${firstName}\n${memberNumber}\n${comments}`;
             sendText(msg);
             return false;
         });
