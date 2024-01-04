@@ -1,0 +1,89 @@
+//<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>フォーム</title>
+</head>
+<body>
+    <form action="submit" method="post">
+        <label for="date">受診希望日付を選択する:</label>
+        <input type="date" id="date" name="date" required><br>
+
+        <label for="time">希望日時を選択する:</label>
+        <input type="time" id="time" name="time" required><br>
+
+        <label for="lastName">姓(せい)を入力する:</label>
+        <input type="text" id="lastName" name="lastName" required><br>
+
+        <label for="firstName">名(めい)を入力する:</label>
+        <input type="text" id="firstName" name="firstName" required><br>
+
+        <label>会員番号の入力:</label><br>
+        <input type="radio" id="knowMember" name="memberStatus" value="known" onclick="toggleMemberInput(true)">会員番号がわかる
+        <input type="radio" id="dontKnowMember" name="memberStatus" value="unknown" onclick="toggleMemberInput(false)">会員番号がわからない<br>
+
+        <div id="memberInput" style="display:none;">
+            <label for="memberNumber">会員番号を入力する:</label>
+            <input type="text" id="memberNumber" name="memberNumber"><br>
+        </div>
+
+        <label for="comments">その他コメント:</label><br>
+        <textarea id="comments" name="comments" rows="4" cols="50"></textarea><br>
+
+        <input type="submit" value="送信">
+    </form>
+
+    <script>
+        function toggleMemberInput(show) {
+            var memberInputDiv = document.getElementById("memberInput");
+            memberInputDiv.style.display = show ? "block" : "none";
+        }
+    </script>
+    <script>
+    $(document).ready(function () {
+        const liffId = "2002594405-EevzjAV7";
+        initializeLiff(liffId);
+    })
+
+    function initializeLiff(liffId) {
+        liff.init({
+            liffId: liffId
+        }).then(() => {
+            initializeApp();
+        }).catch((err) => {
+            console.log('LIFF Initialization failed ', err);
+        });
+    }
+
+    function sendText(text) {
+        liff.sendMessages([{
+            'type': 'text',
+            'text': text
+        }]).then(function () {
+            liff.closeWindow();
+        }).catch(function (error) {
+            window.alert('Failed to send message ' + error);
+        });
+    }
+
+    const params = (new URL(document.location)).searchParams;
+    const key = params.get('key');
+
+    $(function () {
+        $('form').submit(function () {
+            const date    = $('input[name="date"]').val();
+            const time = $('input[name="time"]').val();
+            const lastName  = $('input[name="lastName"]').val();
+            const firstName  = $('input[name="firstName"]').val();
+            const memberNumber = $('input[name="memberNumber"]').val();
+            const comments = $('input[name="comments"]').val();
+            const msg = `${name}\n${time}\n${lastName}\n${firstName}\n${memberNumber}\n${comments}`;
+            sendText(msg);
+            return false;
+        });
+    });
+
+    </script>
+</body>
+</html>
