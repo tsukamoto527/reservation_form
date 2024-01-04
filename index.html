@@ -23,8 +23,7 @@
         <input type="text" class ="form-control w-100 mt-1" id="firstName" name="firstName" required><br>
 
         <label>会員番号の入力:</label><br>
-        <input type="radio" id="knowMember" name="memberStatus" value="known" onclick="toggleMemberInput(true)">会員番号がわかる
-        <input type="radio" id="dontKnowMember" name="memberStatus" value="unknown" onclick="toggleMemberInput(false)">会員番号がわからない<br>
+        <button type="button" onclick="toggleMemberInput()">切り替える</button><br>
 
         <div id="memberInput" style="display:none;">
             <label for="memberNumber">会員番号を入力する:</label>
@@ -43,11 +42,11 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" crossorigin="anonymous"></script>
     <script charset="utf-8" src="https://static.line-scdn.net/liff/edge/2.1/sdk.js"></script>
     
-    <!-- ラジオボタンの結果に応じてInnputBOXの表示可否を変更 -->
+    <!-- トグルボタンの結果に応じてInnputBOXの表示可否を変更 -->
     <script>
         function toggleMemberInput(show) {
             var memberInputDiv = document.getElementById("memberInput");
-            memberInputDiv.style.display = show ? "block" : "none";
+            memberInputDiv.style.display = (memberInputDiv.style.display === "none" || memberInputDiv.style.display === "") ? "block" : "none";
         }
     </script>
     <script>
