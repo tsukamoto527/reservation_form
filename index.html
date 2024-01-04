@@ -23,7 +23,7 @@
         <input type="text" class ="form-control w-100 mt-1" id="firstName" name="firstName" required><br>
 
         <label>会員番号の入力:</label><br>
-        <button type="button" onclick="toggleMemberInput()">切り替える</button><br>
+        <button type="button" onclick="toggleMemberInput()">番号がわかる</button><br>
 
         <div id="memberInput" style="display:none;">
             <label for="memberNumber">会員番号を入力する:</label>
@@ -45,9 +45,16 @@
     <!-- トグルボタンの結果に応じてInnputBOXの表示可否を変更 -->
     <script>
         function toggleMemberInput(show) {
-            var memberInputDiv = document.getElementById("memberInput");
-            memberInputDiv.style.display = (memberInputDiv.style.display === "none" || memberInputDiv.style.display === "") ? "block" : "none";
+        var toggleButton = document.querySelector('button');
+        
+        if (memberInputDiv.style.display === "none" || memberInputDiv.style.display === "") {
+            memberInputDiv.style.display = "block";
+            toggleButton.textContent = "番号がわからない";
+        } else {
+            memberInputDiv.style.display = "none";
+            toggleButton.textContent = "番号がわかる";
         }
+    }
     </script>
     <script>
     $(document).ready(function () {
