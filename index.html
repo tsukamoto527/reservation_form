@@ -1,106 +1,169 @@
-<html>
+<!DOCTYPE html>
+<html lang="ja">
 <head>
     <meta charset="UTF-8">
-    <title>フォーム</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rossorigin="anonymous">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/themes/base/jquery-ui.min.css">
+    <title>商品選択フォーム</title>
+    <style>
+        h1 {
+            text-align: center;
+        }
+
+        /* 商品コンテナのスタイル */
+        .image-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        /* 画像の周りに赤い境界線を追加するスタイル */
+        img {
+            border: 4px solid transparent; /* 赤い枠がない状態 */
+            border-radius: 8px; /* オプション: 角を丸くする場合 */
+            margin: 8px; /* 画像の周りの余白 */
+            object-fit: cover; /* 画像のアスペクト比を保ちつつ指定されたサイズにフィット */
+            width: 200px; /* 統一された横幅 */
+            height: 200px; /* 統一された縦幅 */
+        }
+
+        img.selected {
+            border-color: red; /* 選択された商品の画像に赤い枠を追加 */
+            border-width: 8px; /* 赤い枠の太さを2倍に変更 */
+        }
+
+        /* 商品選択フォームのスタイル */
+        form {
+            max-width: 400px;
+            margin: 20px auto;
+            text-align: center;
+        }
+
+        /* 数量選択プルダウンのスタイル */
+        select {
+            padding: 8px;
+            font-size: 16px;
+        }
+
+        /* 金額表示のスタイル */
+        #priceDisplay {
+            margin-top: 10px;
+            font-size: 18px;
+            color: green;
+        }
+
+        /* 合計金額表示のスタイル */
+        #totalPriceDisplay {
+            margin-top: 10px;
+            font-size: 18px;
+            color: blue;
+        }
+
+        /* 必要な場合、その他のスタイルを追加してください */
+    </style>
 </head>
 <body>
-    <form action="submit" method="post" class="w-75 mx-auto">
-        <label for="date">受診希望日付を選択する:</label>
-        <input type="date" class ="form-control w-100 mt-1" id="date" name="date" required><br>
 
-        <label for="time">希望日時を選択する:</label>
-        <input type="time" class ="form-control w-100 mt-1" id="time" name="time" required><br>
+<h1>商品選択フォーム</h1>
 
-        <label for="lastName">姓(せい)を入力する:</label>
-        <input type="text" class ="form-control w-100 mt-1" id="lastName" name="lastName" required><br>
+<!-- 商品画像 -->
+<div class="image-container">
+    <img src="https://pics.prcm.jp/6009b115ca68a/85873432/jpeg/85873432.jpeg" alt="商品1の画像" onclick="selectImage(this)" data-price="1000">
+    <img src="https://images.unsplash.com/photo-1462888210965-cdf193fb74de?q=80&w=1074&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="商品2の画像" onclick="selectImage(this)" data-price="2000">
+    <img src="https://images.unsplash.com/photo-1603617385189-cee5d82d5032?q=80&w=987&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="商品3の画像" onclick="selectImage(this)" data-price="3000">
+    <img src="https://images.unsplash.com/photo-1528035616016-47b960a7fac4?q=80&w=1074&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="商品4の画像" onclick="selectImage(this)" data-price="4000">
+    <img src="https://images.unsplash.com/photo-1551415923-58aba9efeb2d?q=80&w=1032&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="商品5の画像" onclick="selectImage(this)" data-price="5000">
+    <img src="https://images.unsplash.com/photo-1601782984586-cfb5e01fbd07?q=80&w=987&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="商品6の画像" onclick="selectImage(this)" data-price="6000">
+    <!-- 他の画像も同様に追加 -->
+</div>
 
-        <label for="firstName">名(めい)を入力する:</label>
-        <input type="text" class ="form-control w-100 mt-1" id="firstName" name="firstName" required><br>
+<!-- 商品選択ボタンと数量選択プルダウン -->
+<form action="#" method="post">
+    <label for="productSelect">商品を選択してください：</label>
+    <select id="productSelect" name="productSelect" onchange="updateImageBorder(this)">
+        <option value="https://pics.prcm.jp/6009b115ca68a/85873432/jpeg/85873432.jpeg" data-price="1000">商品1</option>
+        <option value="https://images.unsplash.com/photo-1462888210965-cdf193fb74de?q=80&w=1074&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" data-price="2000">商品2</option>
+        <option value="https://images.unsplash.com/photo-1603617385189-cee5d82d5032?q=80&w=987&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" data-price="3000">商品3</option>
+        <option value="https://images.unsplash.com/photo-1528035616016-47b960a7fac4?q=80&w=1074&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" data-price="4000">商品4</option>
+        <option value="https://images.unsplash.com/photo-1551415923-58aba9efeb2d?q=80&w=1032&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" data-price="5000">商品5</option>
+        <option value="https://images.unsplash.com/photo-1601782984586-cfb5e01fbd07?q=80&w=987&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" data-price="6000">商品6</option>
+        <!-- 他の商品も同様に追加 -->
+    </select>
 
-        <label>会員番号の入力:</label><br>
-        <button type="button" onclick="toggleMemberInput()">番号がわかる</button><br>
+    <!-- 数量選択プルダウン -->
+    <label for="quantitySelect">数量：</label>
+    <select id="quantitySelect" name="quantitySelect" onchange="updateTotalPrice()">
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <!-- 他の数量も同様に追加 -->
+    </select>
 
-        <div id="memberInput" style="display:none;">
-            <label for="memberNumber">会員番号を入力する:</label>
-            <input type="text" id="memberNumber" name="memberNumber"><br>
-        </div>
+    <!-- 金額表示 -->
+    <div id="priceDisplay"></div>
 
-        <label for="comments">その他コメント:</label><br>
-        <textarea id="comments" name="comments" rows="4" cols="50"></textarea><br>
+    <!-- 合計金額表示 -->
+    <div id="totalPriceDisplay"></div>
 
-        <input type="submit" value="送信">
-    </form>
+    <!-- 他のフォーム要素や送信ボタンを追加する場合はここに追加してください -->
 
-    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" crossorigin="anonymous"></script>
-    <script charset="utf-8" src="https://static.line-scdn.net/liff/edge/2.1/sdk.js"></script>
-    
-    <!-- トグルボタンの結果に応じてInnputBOXの表示可否を変更 -->
-    <script>
-        function toggleMemberInput() {
-            var memberInputDiv = document.getElementById("memberInput");
-            var toggleButton = document.querySelector('button');
-            
-            if (memberInputDiv.style.display === "none" || memberInputDiv.style.display === "") {
-                memberInputDiv.style.display = "block";
-                toggleButton.textContent = "番号がわからない";
-            } else {
-                memberInputDiv.style.display = "none";
-                toggleButton.textContent = "番号がわかる";
-            }
-        }
-    </script>
-    <script>
-    $(document).ready(function () {
-        const liffId = "2002594405-EevzjAV7";
-        initializeLiff(liffId);
-    })
+    <input type="submit" value="選択する">
+</form>
 
-    function initializeLiff(liffId) {
-        liff.init({
-            liffId: liffId
-        }).then(() => {
-            initializeApp();
-        }).catch((err) => {
-            console.log('LIFF Initialization failed ', err);
+<script>
+    function selectImage(selectedImage) {
+        // すべての画像から赤い枠を取り除く
+        document.querySelectorAll('img').forEach(function (img) {
+            img.classList.remove('selected');
         });
+
+        // 選択された画像に赤い枠を追加
+        selectedImage.classList.add('selected');
+
+        // 金額表示を更新
+        updatePriceDisplay(selectedImage.getAttribute('data-price'));
+
+        // 合計金額表示を更新
+        updateTotalPrice();
     }
 
-    function sendText(text) {
-        liff.sendMessages([{
-            'type': 'text',
-            'text': text
-        }]).then(function () {
-            liff.closeWindow();
-        }).catch(function (error) {
-            window.alert('Failed to send message ' + error);
+    function updateImageBorder(selectElement) {
+        // 選択された商品に対応する画像を取得
+        const selectedImageURL = selectElement.value;
+        const selectedImage = document.querySelector(`img[src="${selectedImageURL}"]`);
+
+        // すべての画像から赤い枠を取り除く
+        document.querySelectorAll('img').forEach(function (img) {
+            img.classList.remove('selected');
         });
+
+        // 選択された商品に対応する画像に赤い枠を追加
+        selectedImage.classList.add('selected');
+
+        // 金額表示を更新
+        updatePriceDisplay(selectedImage.getAttribute('data-price'));
+
+        // 合計金額表示を更新
+        updateTotalPrice();
     }
 
-    const params = (new URL(document.location)).searchParams;
-    const key = params.get('key');
+    function updatePriceDisplay(price) {
+        // 金額表示を更新
+        document.getElementById('priceDisplay').textContent = `金額：${price}円`;
+    }
 
-    $(function () {
-        $('form').submit(function () {
-            const date    = $('input[name="date"]').val();
-            const time = $('input[name="time"]').val();
-            const lastName  = $('input[name="lastName"]').val();
-            const firstName  = $('input[name="firstName"]').val();
-            const memberNumber = $('input[name="memberNumber"]').val();
-            const comments = $('input[name="comments"]').val();
-            const msg = `フォーム入力\n${date}\n${time}\n${lastName}\n${firstName}\n${memberNumber}\n${comments}`;
-            sendText(msg);
-            return false;
-        });
-    });
+    function updateTotalPrice() {
+        // 選択された商品の金額と数量を取得
+        const selectedImage = document.querySelector('img.selected');
+        const price = selectedImage.getAttribute('data-price');
+        const quantity = document.getElementById('quantitySelect').value;
 
-    </script>
+        // 合計金額を計算
+        const totalPrice = price * quantity;
+
+        // 合計金額表示を更新
+        document.getElementById('totalPriceDisplay').textContent = `合計金額：${totalPrice}円`;
+    }
+</script>
+
 </body>
 </html>
