@@ -172,6 +172,9 @@
         const quantity = document.getElementById('quantitySelect').value;
         const totalPrice = price * quantity;
 
+        // Google Apps ScriptのスクリプトIDを設定
+        const scriptId = '1nT2fDQNRdt5x8Ct9ipsm6f6ykD8HVj-hBtG8nl5HYz7DEh9BDQFTaD7S';
+
         // 現在時刻を取得
         const currentTime = new Date();
         const timestamp = currentTime.toLocaleString();
@@ -183,8 +186,6 @@
         console.log('数量:', quantity);
         console.log('合計金額:', totalPrice);
 
-        // ここにスプレッドシートへのデータ送信処理を追加する（Google Apps Scriptや他のサーバーサイド処理を使用）
-
         // スプレッドシートへのデータ送信処理
         recordToSpreadsheet(timestamp, productName, price, quantity, totalPrice);
 
@@ -193,7 +194,7 @@
     }
     function recordToSpreadsheetGoogleAppsScript(scriptId, timestamp, productName, price, quantity, totalPrice) {
     // Google Apps Scriptにデータを送信
-    const url = `https://script.google.com/macros/s/1nT2fDQNRdt5x8Ct9ipsm6f6ykD8HVj-hBtG8nl5HYz7DEh9BDQFTaD7S/exec`;
+    const url = `https://script.google.com/macros/s/${scriptId}/exec`;
 
     // データを含むオブジェクトを作成
     const data = {
