@@ -22,8 +22,8 @@
             border-radius: 8px; /* オプション: 角を丸くする場合 */
             margin: 8px; /* 画像の周りの余白 */
             object-fit: cover; /* 画像のアスペクト比を保ちつつ指定されたサイズにフィット */
-            width: 100px; /* 統一された横幅 */
-            height: 100px; /* 統一された縦幅 */
+            width: 90px; /* 統一された横幅 */
+            height: 90px; /* 統一された縦幅 */
         }
 
         img.selected {
@@ -68,27 +68,26 @@
 <!-- 商品画像 -->
 <div class="image-container">
     <img src="https://pics.prcm.jp/6009b115ca68a/85873432/jpeg/85873432.jpeg" alt="商品1の画像" onclick="selectImage(this)" data-price="1000">
-    <img src="https://cake-nishimoto.com/wp-content/uploads/2023/12/7e8263e214942d24f19a8625d25bf429-1.jpg" alt="商品2の画像" onclick="selectImage(this)" data-price="2000">
-    <img src="https://cake-nishimoto.com/wp-content/uploads/2023/12/8a69caa26c797a9435ba1bca14df9951-1.jpg" alt="商品3の画像" onclick="selectImage(this)" data-price="3000">
-    <img src="https://cake-nishimoto.com/wp-content/uploads/2023/12/3ff7cda1fec0b71715cd12be85e09128-1.jpg" alt="商品4の画像" onclick="selectImage(this)" data-price="4000">
+    <img src="https://images.unsplash.com/photo-1462888210965-cdf193fb74de?q=80&w=1074&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="商品2の画像" onclick="selectImage(this)" data-price="2000">
+    <img src="https://images.unsplash.com/photo-1603617385189-cee5d82d5032?q=80&w=987&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="商品3の画像" onclick="selectImage(this)" data-price="3000">
+    <img src="https://images.unsplash.com/photo-1528035616016-47b960a7fac4?q=80&w=1074&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="商品4の画像" onclick="selectImage(this)" data-price="4000">
     <img src="https://images.unsplash.com/photo-1551415923-58aba9efeb2d?q=80&w=1032&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="商品5の画像" onclick="selectImage(this)" data-price="5000">
     <img src="https://images.unsplash.com/photo-1601782984586-cfb5e01fbd07?q=80&w=987&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="商品6の画像" onclick="selectImage(this)" data-price="6000">
     <!-- 他の画像も同様に追加 -->
 </div>
 
 <!-- 商品選択ボタンと数量選択プルダウン -->
-<form action="#" method="post">
+<form action="#" method="post" onsubmit="recordToSpreadsheet(); return false;">
     <label for="productSelect">商品を選択してください：</label>
     <select id="productSelect" name="productSelect" onchange="updateImageBorder(this)">
         <option value="https://pics.prcm.jp/6009b115ca68a/85873432/jpeg/85873432.jpeg" data-price="1000">商品1</option>
-        <option value="https://cake-nishimoto.com/wp-content/uploads/2023/12/7e8263e214942d24f19a8625d25bf429-1.jpg" data-price="2000">商品2</option>
-        <option value="https://cake-nishimoto.com/wp-content/uploads/2023/12/8a69caa26c797a9435ba1bca14df9951-1.jpg" data-price="3000">商品3</option>
-        <option value="https://cake-nishimoto.com/wp-content/uploads/2023/12/3ff7cda1fec0b71715cd12be85e09128-1.jpg" data-price="4000">商品4</option>
+        <option value="https://images.unsplash.com/photo-1462888210965-cdf193fb74de?q=80&w=1074&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" data-price="2000">商品2</option>
+        <option value="https://images.unsplash.com/photo-1603617385189-cee5d82d5032?q=80&w=987&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" data-price="3000">商品3</option>
+        <option value="https://images.unsplash.com/photo-1528035616016-47b960a7fac4?q=80&w=1074&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" data-price="4000">商品4</option>
         <option value="https://images.unsplash.com/photo-1551415923-58aba9efeb2d?q=80&w=1032&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" data-price="5000">商品5</option>
         <option value="https://images.unsplash.com/photo-1601782984586-cfb5e01fbd07?q=80&w=987&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" data-price="6000">商品6</option>
         <!-- 他の商品も同様に追加 -->
     </select>
-    /n
 
     <!-- 数量選択プルダウン -->
     <label for="quantitySelect">数量：</label>
@@ -96,9 +95,6 @@
         <option value="1">1</option>
         <option value="2">2</option>
         <option value="3">3</option>
-        <option value="4">4</option>
-        <option value="5">5</option>
-        <option value="6">6</option>
         <!-- 他の数量も同様に追加 -->
     </select>
 
@@ -110,7 +106,7 @@
 
     <!-- 他のフォーム要素や送信ボタンを追加する場合はここに追加してください -->
 
-    <input type="submit" value="選択する">
+    <input type="submit" value="送信する">
 </form>
 
 <script>
@@ -166,6 +162,34 @@
 
         // 合計金額表示を更新
         document.getElementById('totalPriceDisplay').textContent = `合計金額：${totalPrice}円`;
+    }
+
+    function recordToSpreadsheet() {
+        // 選択された商品の情報を取得
+        const selectedImage = document.querySelector('img.selected');
+        const productName = `商品${selectedImage.alt.match(/\d+/)[0]}`;
+        const price = selectedImage.getAttribute('data-price');
+        const quantity = document.getElementById('quantitySelect').value;
+        const totalPrice = price * quantity;
+
+        // 現在時刻を取得
+        const currentTime = new Date();
+        const timestamp = currentTime.toLocaleString();
+
+        // 送信内容をログに表示
+        console.log('Timestamp:', timestamp);
+        console.log('商品名:', productName);
+        console.log('商品単価:', price);
+        console.log('数量:', quantity);
+        console.log('合計金額:', totalPrice);
+
+        // ここにスプレッドシートへのデータ送信処理を追加する（Google Apps Scriptや他のサーバーサイド処理を使用）
+
+        // スプレッドシートへのデータ送信処理
+        recordToSpreadsheet(timestamp, productName, price, quantity, totalPrice);
+
+        // 送信後にユーザーにフィードバックを表示（例: アラート）
+        alert('送信が完了しました。');
     }
 </script>
 
