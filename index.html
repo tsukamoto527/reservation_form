@@ -191,6 +191,37 @@
         // 送信後にユーザーにフィードバックを表示（例: アラート）
         alert('送信が完了しました。');
     }
+    function recordToSpreadsheetGoogleAppsScript(scriptId, timestamp, productName, price, quantity, totalPrice) {
+    // Google Apps Scriptにデータを送信
+    const url = `https://script.google.com/macros/s/1nT2fDQNRdt5x8Ct9ipsm6f6ykD8HVj-hBtG8nl5HYz7DEh9BDQFTaD7S/exec`;
+
+    // データを含むオブジェクトを作成
+    const data = {
+        timestamp: timestamp,
+        productName: productName,
+        price: price,
+        quantity: quantity,
+        totalPrice: totalPrice
+    };
+
+    // Fetch APIを使用してGoogle Apps Scriptにデータを送信
+    fetch(url, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log('Success:', data);
+    })
+    .catch((error) => {
+        console.error('Error:', error);
+    });
+}
+
+    
 </script>
 
 </body>
